@@ -14,7 +14,6 @@ class NetworkDevicesModel(QAbstractTableModel):
     def __init__(self, data=None, parent=None):
         super().__init__(parent)
         self._data = data or []
-        # Скрываем колонку Vendor, оставив остальные поля
         self._headers = ["IP", "MAC", "First Seen", "Last Seen"]  
 
     def rowCount(self, parent=None):
@@ -25,7 +24,6 @@ class NetworkDevicesModel(QAbstractTableModel):
 
     def data(self, index, role=Qt.DisplayRole):
         if role == Qt.DisplayRole:
-            # Изменили порядок индексации полей, исключив vendor
             columns = [
                 'ip_address', 'mac_address',
                 'first_seen', 'last_seen'
@@ -143,7 +141,7 @@ class NetworkScannerClient(QMainWindow):
                     formatted_device = {
                         'ip_address': device[0],
                         'mac_address': device[1],
-                        'first_seen': device[3],  # Пропускаем vendor
+                        'first_seen': device[3],
                         'last_seen': device[4]
                     }
                     formatted_data.append(formatted_device)
