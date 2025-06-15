@@ -95,7 +95,7 @@ class NetworkScannerClient(QMainWindow):
         self.devices_model = NetworkDevicesModel()
         self.devices_table.setModel(self.devices_model)
     
-        # Настройка растягивания столбцов
+        # пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         self.devices_table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         layout.addWidget(self.devices_table)
     
@@ -136,7 +136,7 @@ class NetworkScannerClient(QMainWindow):
                 """, (network_id,))
         
                 devices = cursor.fetchall()
-                formatted_data = []  # Преобразуем данные в словарь для удобства
+                formatted_data = []  # пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
                 for device in devices:
                     formatted_device = {
                         'ip_address': device[0],
@@ -185,7 +185,7 @@ class NetworkScannerClient(QMainWindow):
             QMessageBox.warning(self, "Warning", "Please select a network to delete")
             return
         
-        # Подтверждение удаления
+        # пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         reply = QMessageBox.question(
             self,
             "Confirm Delete",
@@ -198,13 +198,13 @@ class NetworkScannerClient(QMainWindow):
         
         try:
             with self.db_connection.cursor() as cursor:
-                # Удаление устройств данной сети
+                # пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
                 cursor.execute(
                     "DELETE FROM network_devices WHERE network_id = %s",
                     (network_id,)
                 )
             
-                # Удаление самой сети
+                # пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
                 cursor.execute(
                     "DELETE FROM scan_networks WHERE id = %s",
                     (network_id,)
